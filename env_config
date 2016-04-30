@@ -1,0 +1,4 @@
+/Users/boriskravtsov/Google_Drive/Dev/gemfire/apache-geode-1.0.0-incubating.M1/bin
+
+
+export CLASSPATH=./Users/boriskravtsov/Google_Drive/Dev/gemfire/apache-geode-1.0.0-incubating.M1/bin:$CLASSPATH

@@ -1,0 +1,29 @@
+
+#Locator
+docker build -t pivotal/gemfire-locator .
+docker run -p 41111:41111 -p 1099:1099 --name locator -dti --add-host dockerhost:192.168.99.100 -d pivotal/gemfire-locator 
+
+
+#Server
+docker build -t pivotal/gemfire-server .
+docker run -p 40404:40404 --name server -dti --add-host dockerhost:192.168.99.100 -d pivotal/gemfire-server 
+
+
+#Client
+docker build -t pivotal/gemfire-client .
+docker run --name client -dti --add-host dockerhost:192.168.99.100 -d pivotal/gemfire-client
+
+#tmp
+docker run -dit ubuntu
+docker port locator
+
+
+#gemfire
+gfsh connect --locator=localhost[41111] 
+gfsh connect --locator=192.168.0.132[41111]
+
+connect --locator=dockerhost[41111] 
+connect --jmx-manager=dockerhost[1099]
+
+
+gfsh connect --locator=172.17.0.2[41111] 
