@@ -1,0 +1,15 @@
+version: '2'
+services:
+  consumer:
+    image: boriza/gemfire-locator:latest
+    build: consumer/
+    extra_hosts:
+     - "locatorhost:172.17.0.2"
+  producer:
+    image: boriza/gemfire-locator:latest
+    build: producer/
+    extra_hosts:
+     - "locatorhost:172.17.0.2"
+    depends_on:
+     - consumer
+     

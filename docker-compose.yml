@@ -1,12 +1,26 @@
 version: '2'
 services:
   locator:
-    build: .
+    image: boriza/gemfire-locator:latest
+    build: locator/
     ports:
-     - "5000:5000"
-    volumes:
-     - .:/code
+     - "41111:41111"
+     - "1099:1099"
+    extra_hosts:
+     - "locatorhost:172.17.0.2"
+  server:
+    image: boriza/gemfire-server:latest
+    build: server/
     depends_on:
-     - redis
-  redis:
-    image: redis
+     - locator
+    ports:
+     - "40404:40404"
+    extra_hosts:
+     - "locatorhost:172.17.0.2"
+  client:
+    image: boriza/gemfire-client:latest
+    build: client/
+    depends_on:
+     - server
+    extra_hosts:
+     - "locatorhost:172.17.0.2"

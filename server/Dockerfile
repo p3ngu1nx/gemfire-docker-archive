@@ -6,7 +6,7 @@
 #
 
 # Pull base gemfire image.
-FROM pivotal/gemfire-base
+FROM boriza/gemfire-base
 
 RUN apt-get update && apt-get install -y supervisor
 RUN mkdir -p /var/run/gfsh /var/log/supervisor
