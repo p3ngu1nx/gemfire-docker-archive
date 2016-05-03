@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y supervisor
 RUN mkdir -p /var/run/gfsh /var/log/supervisor
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY extra-classes/ /extra-classes/
+COPY gemfire.properties /
 
 ENV SERVER_NAME $(date +NAME%Y%m%H%M%S)
 
