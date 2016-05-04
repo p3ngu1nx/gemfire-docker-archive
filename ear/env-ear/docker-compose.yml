@@ -1,0 +1,42 @@
+version: '2'
+services:
+  server:
+    image: boriza/gemfire-server:latest
+    build: server/
+    ports:
+     - "40404:40404"
+    extra_hosts:
+     - "serverhost:172.16.111.3"
+    networks:
+      gemfire_net:
+        ipv4_address: 172.16.111.3
+  consumer:
+    image: boriza/gemfire-base:latest
+    build: consumer/
+    restart: always
+    depends_on:
+     - server
+    extra_hosts:
+     - "serverhost:172.16.111.3"
+    networks:
+      gemfire_net:
+        ipv4_address: 172.16.111.4
+  worker:
+    image: boriza/gemfire-base:latest
+    build: worker/
+    restart: always
+    depends_on:
+     - consumer
+    extra_hosts:
+     - "serverhost:172.16.111.3"
+    networks:
+      gemfire_net:
+        ipv4_address: 172.16.111.5
+networks:
+  gemfire_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.111.0/24
+        gateway: 172.16.111.1
