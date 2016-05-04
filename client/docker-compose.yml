@@ -1,0 +1,15 @@
+version: '2'
+services:
+  client:
+    image: boriza/gemfire-client:latest
+    build: .
+    extra_hosts:
+     - "locatorhost:172.16.111.2"
+    networks:
+     - gemfiredocker_gemfire_net
+    external_links:
+     - gemfiredocker_server_1:server
+     - gemfiredocker_locator_1:locator
+networks:
+  gemfiredocker_gemfire_net:
+    external: true

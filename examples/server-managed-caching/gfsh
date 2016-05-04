@@ -1,0 +1,7 @@
+start locator --name=locator1
+start server --name=server1 --server-port=40404
+connect
+create region --name=customerRegion --type=REPLICATE
+
+#Log
+cat /Pivotal_GemFire/SampleCode/quickstart/server1/server1.log

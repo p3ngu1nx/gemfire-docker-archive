@@ -1,22 +1,28 @@
 version: '2'
 services:
   consumer:
-    image: boriza/gemfire-locator:latest
+    image: boriza/gemfire-base:latest
     build: quickstart/consumer/
+    # restart: always
     extra_hosts:
-     - "locatorhost:172.17.0.2"
+     - "locatorhost:172.16.111.2"
     networks:
      - gemfire_net
     depends_on:
      - server
+    environment:
+        GEMFIRE_NAME: consumer_${RANDOM}
   producer:
-    image: boriza/gemfire-locator:latest
+    image: boriza/gemfire-base:latest
+    # restart: always
     build: quickstart/producer/
     extra_hosts:
-     - "locatorhost:172.17.0.2"
+     - "locatorhost:172.16.111.2"
     depends_on:
      - consumer
     networks:
      - gemfire_net
     depends_on:
      - server
+    environment:
+        GEMFIRE_NAME: producer_${RANDOM}

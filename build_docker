@@ -24,11 +24,12 @@ docker port locator
 gfsh connect --locator=localhost[41111] 
 gfsh connect --locator=192.168.0.132[41111]
 
-connect --locator=dockerhost[41111] 
+connect --locator=locatorhost[41111] 
 connect --jmx-manager=dockerhost[1099]
 
-
-gfsh connect --locator=172.17.0.2[41111] 
-
-
 docker push boriza/gemfire-base
+
+
+#start consumer only
+docker-compose -f docker-compose.yml -f quickstart/docker-compose.yml run consumer /bin/bash
+docker-compose run server /bin/bash

@@ -23,16 +23,16 @@ services:
     networks:
       gemfire_net:
         ipv4_address: 172.16.111.3
-  client:
-    image: boriza/gemfire-client:latest
-    build: client/
-    depends_on:
-     - server
-    extra_hosts:
-     - "locatorhost:172.16.111.2"
-    networks:
-      gemfire_net:
-        ipv4_address: 172.16.111.4
+  # client:
+  #   image: boriza/gemfire-client:latest
+  #   build: client/
+  #   depends_on:
+  #    - server
+  #   extra_hosts:
+  #    - "locatorhost:172.16.111.2"
+  #   networks:
+  #     gemfire_net:
+  #       ipv4_address: 172.16.111.4
 networks:
   gemfire_net:
     driver: bridge
@@ -41,4 +41,3 @@ networks:
       config:
       - subnet: 172.16.111.0/24
         gateway: 172.16.111.1
-
