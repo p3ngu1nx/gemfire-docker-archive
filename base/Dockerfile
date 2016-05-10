@@ -19,6 +19,9 @@ RUN apt-get update
 RUN apt-get install -y oracle-java8-installer
 RUN rm -rf /var/lib/apt/lists/*
 RUN rm -rf /var/cache/oracle-jdk8-installer
+RUN apt-get update && apt-get install -y supervisor
+RUN mkdir -p /var/run/gfsh /var/log/supervisor
+
 
 # Define commonly used JAVA_HOME variable
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle

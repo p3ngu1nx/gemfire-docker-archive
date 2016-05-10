@@ -8,17 +8,19 @@
 # Pull base gemfire image.
 FROM boriza/gemfire-base
 
-RUN apt-get update && apt-get install -y supervisor
-RUN mkdir -p /var/run/gfsh /var/log/supervisor
-
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY custom-classes/ /custom-classes/
+#COPY custom-classes/ /custom-classes/
 COPY gemfire.properties /
+#COPY bin/gfsh $GEMFIRE/bin/
+COPY bin/gemfire.jar $GEMFIRE/lib/
+
+#overwrite an existing xml file
+COPY xml/Server.xml $GEMFIRE/SampleCode/quickstart/xml
+#RUN mkdir -p /Pivotal_GemFire/SampleCode/quickstart/server1
 
 ENV SERVER_NAME $(date +NAME%Y%m%H%M%S)
 
 WORKDIR $GEMFIRE/SampleCode/quickstart
-
 
 # Default ports:
 # RMI/JMX 1099

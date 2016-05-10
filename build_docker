@@ -29,7 +29,6 @@ connect --jmx-manager=dockerhost[1099]
 
 docker push boriza/gemfire-base
 
-
 #start consumer only
 docker-compose -f docker-compose.yml -f quickstart/docker-compose.yml run consumer /bin/bash
 docker-compose run server /bin/bash

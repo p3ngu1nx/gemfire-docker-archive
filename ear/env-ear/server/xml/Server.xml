@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<!-- Server.xml
+     Configures a cache to serve caching clients at port 40405.
+     The example region also is configured with a loader. 
+-->
+
+<!DOCTYPE cache PUBLIC
+  "-//GemStone Systems, Inc.//GemFire Declarative Caching 6.5//EN"
+  "http://www.gemstone.com/dtd/cache6_5.dtd">
+<cache>
+  <cache-server port="40404"/>
+
+ <disk-store name="ds1" auto-compact="true" max-oplog-size="1024" queue-size="10000" time-interval="15">
+    <disk-dirs>
+      <disk-dir dir-size="4096">persistData1</disk-dir>
+    </disk-dirs>
+ </disk-store>
+
+  <region name="exampleRegion" >
+    <region-attributes refid="REPLICATE_PERSISTENT" disk-store-name="ds1" disk-synchronous="false">
+      <cache-loader>
+        <class-name>quickstart.SimpleCacheLoader</class-name>
+      </cache-loader>
+    </region-attributes>
+  </region>
+</cache>
