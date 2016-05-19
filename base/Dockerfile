@@ -33,4 +33,3 @@ ENV GEMFIRE /Pivotal_GemFire
 ENV PATH $PATH:$GEMFIRE/bin
 
 ENV GF_JAVA $JAVA_HOME/bin/java
-
