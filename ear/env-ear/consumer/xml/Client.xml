@@ -11,7 +11,8 @@
  -->
 <client-cache>
 	<pool name="client" subscription-enabled="true">
-		<server host="serverhost" port="40404" />
+<!-- 		<server host="serverhost" port="40404" /> -->
+		<locator host="locatorhost" port="10334"/>
 	</pool>
 
 	<region name="exampleRegion">

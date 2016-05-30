@@ -9,9 +9,6 @@
 FROM boriza/gemfire-base
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY xml/Server.xml $GEMFIRE/SampleCode/quickstart/xml
-#COPY bin/gemfire.jar $GEMFIRE/lib/
-COPY lib/encryption.jar $GEMFIRE/lib/
 
 ENV SERVER_NAME $(date +NAME%Y%m%H%M%S)
 

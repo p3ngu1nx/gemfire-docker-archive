@@ -1,37 +1,51 @@
 version: '2'
 services:
+  locator:
+    image: boriza/gemfire-locator
+    build: locator/
+    extra_hosts:
+     - "locatorhost:172.16.111.6"
+    networks:
+      gemfire_net:
+        ipv4_address: 172.16.111.6
   server:
-    image: boriza/gemfire-server:latest
+    image: boriza/gemfire-server
     build: server/
+    depends_on:
+     - locator
     ports:
      - "40404:40404"
     extra_hosts:
      - "serverhost:172.16.111.3"
+     - "locatorhost:172.16.111.6"
     networks:
       gemfire_net:
         ipv4_address: 172.16.111.3
   consumer:
-    image: boriza/gemfire-base:latest
+    image: boriza/gemfire-consumer:latest
     build: consumer/
     restart: always
     depends_on:
      - server
     extra_hosts:
      - "serverhost:172.16.111.3"
+     - "locatorhost:172.16.111.6"
     networks:
       gemfire_net:
         ipv4_address: 172.16.111.4
   worker:
-    image: boriza/gemfire-base:latest
+    image: boriza/gemfire-worker:latest
     build: worker/
     restart: always
     depends_on:
      - consumer
     extra_hosts:
      - "serverhost:172.16.111.3"
+     - "locatorhost:172.16.111.6"
     networks:
       gemfire_net:
         ipv4_address: 172.16.111.5
+
 networks:
   gemfire_net:
     driver: bridge
