@@ -1,11 +1,7 @@
-#clean up docker - remove unused images
-docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")
-
-docker-compose down
-docker-compose build
-docker-compose up
-(echo "***************  SERVER **************"; docker-compose up server ) &
-(sleep 20; echo "***************  WORKER **************"; docker-compose up worker) &
-(sleep 25; echo "***************  CLIENT **************"; docker-compose up consumer) &
-(sleep 30; echo "***************  SERVER **************"; docker logs envear_server_1; docker exec -it envear_server_1 gfsh "stop server"; docker exec -it envear_server_1 gfsh "start server --name=server1 --log-level=warn --cache-xml-file=xml/Server.xml --properties-file=gemfire.properties --classpath=/Pivotal_GemFire/SampleCode/quickstart/classes:/Pivotal_GemFire/lib/encryption.jar") &
-
+(echo "***************  DOCKER **************"; docker-compose build) &
+(sleep 5; echo "***************  LOCATOR **************"; docker-compose up locator ) &
+(sleep 6 ; echo "***************  SERVER **************"; docker-compose up server) &
+(sleep 30; echo "***************  CONSUMER **************"; docker-compose up consumer ) &
+(sleep 35; echo "***************  WORKER **************"; docker-compose up worker ) &
+(sleep 40; echo "***************  SERVER **************"; docker exec -it envear_locator_1 gfsh -e "connect" -e "stop server --name=server1" -e "start server --name=server1" ;) &
+(sleep 50; echo "***************  DONE **************"; docker logs envear_server_1; docker exec -it envear_server_1 cat /Pivotal_GemFire/SampleCode/quickstart/server1/server1.log; docker-compose down )

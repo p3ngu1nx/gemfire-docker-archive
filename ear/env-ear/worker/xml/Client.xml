@@ -11,12 +11,12 @@
  -->
 <client-cache>
 	<pool name="client" subscription-enabled="true">
-		<!-- <server host="serverhost" port="40404" /> -->
 		<locator host="locatorhost" port="10334"/>
+		<!-- <server host="serverhost" port="40404"/> -->
 	</pool>
 
 	<region name="exampleRegion">
-		<region-attributes refid="CACHING_PROXY">
+		<region-attributes refid="CACHING_PROXY" pool-name="client">
 			<cache-listener>
 				<class-name>quickstart.SimpleCacheListener</class-name>
 			</cache-listener>
