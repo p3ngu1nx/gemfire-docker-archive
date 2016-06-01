@@ -2,6 +2,7 @@
 
 #sudo ln -s /Users/boris/Documents/Dev/Dev/gemfire/gemfire-dev/gemfire821X_maint ~/Dev/gemfire-dev
 #sudo ln -s /Users/boris/Documents/Dev/Dev/gemfire/gemfire-docker-ear/gemfire-docker/ear/env-ear ~/Dev/gemfire-docker-ear
+ln -s /Users/boris/Documents/Dev/Workspace-Intellij/gemfire-client ~/Dev/gemfire-client
 
 #script:
 rm ~/Dev/gemfire-docker-ear/base/Pivotal_GemFire.tar

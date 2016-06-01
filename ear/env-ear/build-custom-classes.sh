@@ -15,14 +15,22 @@ rsync -rv --include '/' --include 'UninterruptibleRandomAccessFile$*.class' --ex
 #rsync -rv --include '/' --include 'DiskEntry$*.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/*/classes/com/gemstone/gemfire/internal/cache/ server/bin/com/gemstone/gemfire/internal/cache/
 
 
-yes | cp server/original/gemfire_original.jar server/bin/gemfire.jar
+# yes | cp server/original/gemfire_original.jar server/bin/gemfire.jar
+yes | cp server/lib/gemfire.jar server/bin
+
+cd ~/Dev/gemfire-client/
+mvn package
+cd -
+yes | cp ~/Dev/gemfire-client/target/gemfire-client-1.0-SNAPSHOT.jar worker/lib
+yes | cp ~/Dev/gemfire-client/target/gemfire-client-1.0-SNAPSHOT.jar server/lib
+
 
 cp ~/Dev/CBA_EaR/encryption/target/encryption-1.0.0.beta1.jar server/lib/encryption.jar
 ls -l server/lib/encryption.jar
 
-cd server/bin/
-
-echo Rebuilding jars ... please wait ...
+# cd server/bin/
+# 
+# echo Rebuilding jars ... please wait ...
 
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/Oplog$1.class'
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/Oplog$2.class'
@@ -47,7 +55,7 @@ echo Rebuilding jars ... please wait ...
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/Oplog$OplogFileType.class'
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/Oplog$OpState.class'
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/Oplog$RawByteKey.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/Oplog.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/Oplog.class'
 
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/DiskEntry$Helper$ByteArrayValueWrapper.class'
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/DiskEntry$Helper$ChunkValueWrapper.class'
@@ -58,19 +66,21 @@ jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/Oplog.class'
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/DiskEntry$RecoveredEntry.class'
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/DiskEntry.class'
 
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$1.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$FileOperation.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$1.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$10.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$11.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$2.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$3.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$4.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$5.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$6.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$7.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$8.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$9.class'
-jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl.class'
-cd ../..
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$1.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$FileOperation.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$1.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$10.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$11.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$2.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$3.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$4.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$5.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$6.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$7.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$8.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl$9.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile$UninterruptibleFileChannelImpl.class'
+#--jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/persistence/UninterruptibleRandomAccessFile.class'
+#--
+#--cd ../..
 

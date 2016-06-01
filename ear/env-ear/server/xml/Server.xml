@@ -20,7 +20,7 @@
   <region name="exampleRegion" >
     <region-attributes refid="REPLICATE_PERSISTENT" disk-store-name="ds1" disk-synchronous="false">
       <cache-loader>
-        <class-name>quickstart.SimpleCacheLoader</class-name>
+        <class-name>io.pivotal.cba.ear.test.client.SimpleCacheLoader</class-name>
       </cache-loader>
     </region-attributes>
   </region>
