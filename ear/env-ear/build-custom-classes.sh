@@ -1,50 +1,4 @@
-#rm -r server/custom-classes
-#mkdir -p server/custom-classes/com/gemstone/gemfire/management/internal/cli
-
-#rm -r server/bin/gemfire
-#mkdir server/bin/gemfire
-#unzip server/bin/gemfire_original.jar -d server/bin/gemfire
-
-# cp /bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/distributed/ServerLauncher.class server/bin/gemfire/com/gemstone/gemfire/distributed
-# cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/distributed/ServerLauncher$1.class' server/bin/gemfire/com/gemstone/gemfire/distributed
-# cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/distributed/ServerLauncher$2.class' server/bin/gemfire/com/gemstone/gemfire/distributed
-# cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/distributed/ServerLauncher$3.class' server/bin/gemfire/com/gemstone/gemfire/distributed
-# cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/distributed/ServerLauncher$Builder.class' server/bin/gemfire/com/gemstone/gemfire/distributed
-# cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/distributed/ServerLauncher$Command.class' server/bin/gemfire/com/gemstone/gemfire/distributed
-# cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/distributed/ServerLauncher$ServerControllerParameters.class' server/bin/gemfire/com/gemstone/gemfire/distributed
-# cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/distributed/ServerLauncher$ServerState.class' server/bin/gemfire/com/gemstone/gemfire/distributed
-
-#yes | cp /bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/management/internal/cli/Launcher.class server/bin/gemfire/com/gemstone/gemfire/management/internal/cli
-#yes | cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/management/internal/cli/Launcher$1.class' server/bin/gemfire/com/gemstone/gemfire/management/internal/cli
-#yes | cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/management/internal/cli/Launcher$StartupTimeLogHelper.class' server/bin/gemfire/com/gemstone/gemfire/management/internal/cli
-
-
-#rm server/gemfire.jar
-#zip -r server/gemfire.jar server/bin/gemfire
-
-#----------------------------------
-
-# rm -r server/bin/com/
-# mkdir -p server/bin/com/gemstone/gemfire/management/internal/cli
-# 
-# yes | cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/management/internal/cli/Launcher.class' server/bin/com/gemstone/gemfire/management/internal/cli/
-# yes | cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/management/internal/cli/Launcher$1.class' server/bin/com/gemstone/gemfire/management/internal/cli/
-# yes | cp '/bk/Dev/gemfire/incubator-geode/gemfire-core/build/classes/main/com/gemstone/gemfire/management/internal/cli/Launcher$StartupTimeLogHelper.class' server/bin/com/gemstone/gemfire/management/internal/cli/
-# 
-# 
-# jar uf myJar com\test\MyClass$MySubclass.class
-# 
-# yes | cp server/bin/gemfire_original.jar server/bin/gemfire.jar
-# 
-# cd server/bin/
-# jar uf gemfire.jar 'com/gemstone/gemfire/management/internal/cli/Launcher.class'
-# jar uf gemfire.jar 'com/gemstone/gemfire/management/internal/cli/Launcher$1.class'
-# jar uf gemfire.jar 'com/gemstone/gemfire/management/internal/cli/Launcher$StartupTimeLogHelper.class'
-# cd ../..
-
-#----------------------------------
-
-#com/gemstone/gemfire/internal/cache
+#!/bin/sh
 
 rm -r server/bin/com/
 mkdir -p server/bin/com/gemstone/gemfire/internal/cache
@@ -52,18 +6,23 @@ mkdir -p server/bin/com/gemstone/gemfire/internal/cache
 rm -r server/lib/
 mkdir -p server/lib/
 
-rsync -rv --include '/' --include '*.jar' --exclude '*' --prune-empty-dirs ~/Documents/Dev/Dev/gemfire/gemfire-dev/gemfire821X_maint/build-artifacts/linux/product/lib/ server/lib/
-rsync -rv --include '/' --include 'Oplog.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/linux/classes/com/gemstone/gemfire/internal/cache/ server/bin/com/gemstone/gemfire/internal/cache/
-rsync -rv --include '/' --include 'Oplog$*.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/linux/classes/com/gemstone/gemfire/internal/cache/ server/bin/com/gemstone/gemfire/internal/cache/
-rsync -rv --include '/' --include 'UninterruptibleRandomAccessFile$*.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/linux/classes/com/gemstone/gemfire/internal/cache/persistence/ server/bin/com/gemstone/gemfire/internal/cache/persistence/
+rsync -rv --include '/' --include '*.jar' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/*/product/lib/ server/lib/
+rsync -rv --include '/' --include 'Oplog.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/*/classes/com/gemstone/gemfire/internal/cache/ server/bin/com/gemstone/gemfire/internal/cache/
+rsync -rv --include '/' --include 'Oplog$*.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/*/classes/com/gemstone/gemfire/internal/cache/ server/bin/com/gemstone/gemfire/internal/cache/
+rsync -rv --include '/' --include 'UninterruptibleRandomAccessFile$*.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/*/classes/com/gemstone/gemfire/internal/cache/persistence/ server/bin/com/gemstone/gemfire/internal/cache/persistence/
 
-#rsync -rv --include '/' --include 'DiskEntry.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/linux/classes/com/gemstone/gemfire/internal/cache/ server/bin/com/gemstone/gemfire/internal/cache/
-#rsync -rv --include '/' --include 'DiskEntry$*.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/linux/classes/com/gemstone/gemfire/internal/cache/ server/bin/com/gemstone/gemfire/internal/cache/
+#rsync -rv --include '/' --include 'DiskEntry.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/*/classes/com/gemstone/gemfire/internal/cache/ server/bin/com/gemstone/gemfire/internal/cache/
+#rsync -rv --include '/' --include 'DiskEntry$*.class' --exclude '*' --prune-empty-dirs ~/Dev/gemfire-dev/build-artifacts/*/classes/com/gemstone/gemfire/internal/cache/ server/bin/com/gemstone/gemfire/internal/cache/
 
 
-yes | cp server/bin/gemfire_original.jar server/bin/gemfire.jar
+yes | cp server/original/gemfire_original.jar server/bin/gemfire.jar
+
+cp ~/Dev/CBA_EaR/encryption/target/encryption-1.0.0.beta1.jar server/lib/encryption.jar
+ls -l server/lib/encryption.jar
 
 cd server/bin/
+
+echo Rebuilding jars ... please wait ...
 
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/Oplog$1.class'
 # jar uf gemfire.jar 'com/gemstone/gemfire/internal/cache/Oplog$2.class'
